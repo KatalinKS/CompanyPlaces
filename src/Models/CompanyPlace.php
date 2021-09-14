@@ -14,9 +14,10 @@ use App\Scopes\Company\CompanyPlace\ConnectionLinksScope;
 use App\Traits\Model\GetterMethods;
 use App\Traits\Model\HasCompanyContact;
 use Illuminate\Database\Eloquent\Model;
+use KatalinKS\CompanyPlaces\Interfaces\Place;
 use Spatie\Translatable\HasTranslations;
 
-class CompanyPlace extends Model implements CompanyContact
+class CompanyPlace extends Model implements CompanyContact, Place
 {
     use HasTranslations, GetterMethods, HasCompanyContact;
 
@@ -73,5 +74,10 @@ class CompanyPlace extends Model implements CompanyContact
     protected static function booted()
     {
         self::addGlobalScope(new ConnectionLinksScope());
+    }
+
+    public function getId(): int
+    {
+        return $this->getOriginal('id');
     }
 }
