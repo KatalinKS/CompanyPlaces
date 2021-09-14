@@ -18,12 +18,15 @@ use Spatie\Translatable\HasTranslations;
 
 class CompanyPlace extends Model implements CompanyContact
 {
-    use HasTranslations, GetterMethods, HasCompanyContact;
+    use HasTranslations;
+    use GetterMethods;
+    use HasCompanyContact;
 
     public $timestamps = false;
     protected $translatable = ['name'];
 
-    public static function create(array $data): self {
+    public static function create(array $data): self
+    {
         $model = new self();
         $model->name = $data['name'];
         $model->alias = $data['alias'];
@@ -33,7 +36,8 @@ class CompanyPlace extends Model implements CompanyContact
         return $model;
     }
 
-    public function updateObject(array $data): self {
+    public function updateObject(array $data): self
+    {
         $this->name = $data['name'];
         $this->alias = $data['alias'];
         $this->type_id = $data['type'];
@@ -42,32 +46,39 @@ class CompanyPlace extends Model implements CompanyContact
         return $this;
     }
 
-    public function metadata() {
-        return $this->morphMany(MetaData::class, 'metadata','model', 'model_id', 'id');
+    public function metadata()
+    {
+        return $this->morphMany(MetaData::class, 'metadata', 'model', 'model_id', 'id');
     }
 
-    public function address() {
-        return $this->morphOne(Address::class, 'metadata','model', 'model_id', 'id');
+    public function address()
+    {
+        return $this->morphOne(Address::class, 'metadata', 'model', 'model_id', 'id');
     }
 
-    public function descriptions() {
-        return $this->morphMany(Description::class, 'metadata','model', 'model_id', 'id');
+    public function descriptions()
+    {
+        return $this->morphMany(Description::class, 'metadata', 'model', 'model_id', 'id');
     }
 
-    public function type() {
+    public function type()
+    {
         return $this->belongsTo(PlaceType::class);
     }
 
-    public function map() {
-        return $this->morphOne(MapLocation::class, 'map','model', 'model_id', 'id');
+    public function map()
+    {
+        return $this->morphOne(MapLocation::class, 'map', 'model', 'model_id', 'id');
     }
 
-    public function panorama() {
-        return $this->morphOne(Panorama::class, 'panorama','model', 'model_id', 'id');
+    public function panorama()
+    {
+        return $this->morphOne(Panorama::class, 'panorama', 'model', 'model_id', 'id');
     }
 
-    public function workchedule() {
-        return $this->morphOne(WorkSchedule::class, 'workchedule','model', 'model_id', 'id');
+    public function workchedule()
+    {
+        return $this->morphOne(WorkSchedule::class, 'workchedule', 'model', 'model_id', 'id');
     }
 
     protected static function booted()
