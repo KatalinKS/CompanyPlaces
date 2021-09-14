@@ -3,6 +3,8 @@
 namespace KatalinKS\CompanyPlaces;
 
 use KatalinKS\CompanyPlaces\Commands\CompanyPlacesCommand;
+use KatalinKS\CompanyPlaces\Interfaces\Place as PlaceContract;
+use KatalinKS\CompanyPlaces\Models\CompanyPlace;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -21,5 +23,10 @@ class CompanyPlacesServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_companyplaces_table')
             ->hasCommand(CompanyPlacesCommand::class);
+    }
+
+    protected function registerModel(): self
+    {
+        $this->app->bind(PlaceContract::class, CompanyPlace::class);
     }
 }
