@@ -2,9 +2,9 @@
 
 namespace KatalinKS\CompanyPlaces;
 
+use KatalinKS\CompanyPlaces\Commands\CompanyPlacesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use KatalinKS\CompanyPlaces\Commands\CompanyPlacesCommand;
 
 class CompanyPlacesServiceProvider extends PackageServiceProvider
 {
