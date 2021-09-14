@@ -10,6 +10,15 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class CompanyPlacesServiceProvider extends PackageServiceProvider
 {
+    public function boot()
+    {
+        $this->app->singleton(\KatalinKS\CompanyPlaces\Interfaces\CompanyPlaces::class, CompanyPlaces::class);
+
+        $this->registerModels();
+
+        return parent::boot();
+    }
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -25,8 +34,10 @@ class CompanyPlacesServiceProvider extends PackageServiceProvider
             ->hasCommand(CompanyPlacesCommand::class);
     }
 
-    protected function registerModel(): self
+    protected function registerModels(): self
     {
         $this->app->bind(PlaceContract::class, CompanyPlace::class);
+
+        return $this;
     }
 }
