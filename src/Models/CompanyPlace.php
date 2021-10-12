@@ -14,10 +14,12 @@ use App\Scopes\Company\CompanyPlace\ConnectionLinksScope;
 use App\Traits\Model\GetterMethods;
 use App\Traits\Model\HasCompanyContact;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use KatalinKS\CompanyPlaces\Interfaces\CompanyPlace as CompanyPlaceContract;
 use KatalinKS\CompanyPlaces\Interfaces\Place;
 use Spatie\Translatable\HasTranslations;
 
-class CompanyPlace extends Model implements CompanyContact, Place
+class CompanyPlace extends Model implements CompanyContact, Place, CompanyPlaceContract
 {
     use HasTranslations;
     use GetterMethods;
@@ -90,5 +92,10 @@ class CompanyPlace extends Model implements CompanyContact, Place
     public function getId(): int
     {
         return $this->getOriginal('id');
+    }
+
+    public function getOrdersEmails(): Collection
+    {
+        // TODO: Implement getOrdersEmails() method.
     }
 }
